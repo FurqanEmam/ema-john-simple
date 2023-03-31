@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css'
+import { addToDb, getShoppingCart } from '../../../fakeData/fakedb';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([])
@@ -12,11 +13,16 @@ const Shop = () => {
         .then(data => setProducts(data))
     }, []);
 
-    const handleAddToCart = (product) => {
-        const newCart = [...cart,product];
-        setCart(newCart)
-        console.log(newCart)
+    useEffect(()=>{
+        const storedCart = getShoppingCart();
+        console.log(storedCart);
+    }, [])
 
+    const handleAddToCart = (product) => {
+        const newCart = [...cart, product];
+        setCart(newCart);
+        // console.log(newCart);
+        addToDb(product.id);
     };
 
     return (
@@ -38,3 +44,5 @@ const Shop = () => {
 };
 
 export default Shop;
+
+// module 51-5 porjonto watched and practiced here.....
