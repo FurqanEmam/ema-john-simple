@@ -15,8 +15,16 @@ const Shop = () => {
 
     useEffect(()=>{
         const storedCart = getShoppingCart();
-        console.log(storedCart);
-    }, [])
+        for(const id in storedCart){
+            const addedProduct = products.find(product => product.id === id);
+            if(addedProduct){
+                const quantity = storedCart[id];
+                addedProduct.quantity = quantity;
+                console.log(addedProduct);
+            }
+            
+        }
+    }, [products])
 
     const handleAddToCart = (product) => {
         const newCart = [...cart, product];
@@ -46,3 +54,4 @@ const Shop = () => {
 export default Shop;
 
 // module 51-5 porjonto watched and practiced here.....
+// please continue watching 51-6 module from the first as i watched and practiced 5min 58secs of the video.
